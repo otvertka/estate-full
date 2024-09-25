@@ -4,7 +4,7 @@ import React from "react";
 import HomePage from "./pages/homePage/homePage";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ListPage from "./pages/listPage/listPage";
-import Layout from "./pages/layout/layout";
+import { Layout, RequireAuth } from "./pages/layout/layout";
 import SinglePage from "./pages/singlePage/singlePage";
 import 'leaflet/dist/leaflet.css'
 import ProfilePage from "./pages/profilePage/profilePage";
@@ -30,16 +30,22 @@ const App: React.FC = () => {
           element: <SinglePage />
         },
         {
-          path: "/profile",
-          element: <ProfilePage />
-        },
-        {
           path: "/login",
           element: <Login />
         },
         {
           path: "/register",
           element: <Register />
+        }
+      ]
+    },
+    {
+      path: "/",
+      element: <RequireAuth />,
+      children: [
+        {
+          path: "/profile",
+          element: <ProfilePage />
         }
       ]
     }

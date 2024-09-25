@@ -31,7 +31,7 @@ const Login = () => {
 
             updateUser(res.data);
 
-            navigate("/")
+            navigate("/");
         } catch (err) {
             console.log(err);
             setError(err.response.data.message);

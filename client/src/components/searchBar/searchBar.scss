@@ -19,6 +19,7 @@
         border-top-left-radius: 5px;
         border-right: none;
       }
+
       &:last-child {
         border-top-right-radius: 5px;
         border-left: none;
@@ -39,37 +40,41 @@
     }
 
     input {
-      border: none;
       padding: 0px 10px;
+      border: none;
       width: 200px;
 
       @include lg {
         padding: 0px 5px;
-
-        &:nth-child(2),
-        &:nth-child(3) {
-          width: 140px;
-        }
       }
+
       @include md {
-        width: 200px;
         padding: 0px 5px;
-
-        &:nth-child(2),
-        &:nth-child(3) {
-          width: 200px;
-        }
+        width: 200px;
       }
+
       @include sm {
         width: auto;
-        &:nth-child(2),
-        &:nth-child(3) {
-          width: auto;
-        }
         padding: 20px;
         border: 1px solid grey;
       }
+
+      &:nth-child(2),
+      &:nth-child(3) {
+        @include lg {
+          width: 140px;
+        }
+
+        @include md {
+          width: 200px;
+        }
+
+        @include sm {
+          width: auto;
+        }
+      }
     }
+
     button {
       border: none;
       cursor: pointer;

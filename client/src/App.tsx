@@ -10,6 +10,7 @@ import 'leaflet/dist/leaflet.css'
 import ProfilePage from "./pages/profilePage/profilePage";
 import Register from "./pages/registerPage/register";
 import Login from "./pages/loginPage/login";
+import ProfileUpdatePage from "./pages/profileUpdatePage/profileUpdatePage";
 
 const App: React.FC = () => {
   const router = createBrowserRouter([
@@ -37,7 +38,7 @@ const App: React.FC = () => {
           path: "/register",
           element: <Register />
         }
-      ]
+      ],
     },
     {
       path: "/",
@@ -46,6 +47,10 @@ const App: React.FC = () => {
         {
           path: "/profile",
           element: <ProfilePage />
+        },
+        {
+          path: "/profile/update",
+          element: <ProfileUpdatePage />
         }
       ]
     }

@@ -12,6 +12,7 @@ import Register from "./pages/registerPage/register";
 import Login from "./pages/loginPage/login";
 import ProfileUpdatePage from "./pages/profileUpdatePage/profileUpdatePage";
 import NewPostPage from "./pages/newPostPage/newPostPage";
+import { singlePageLoader } from "./lib/loaders";
 
 const App: React.FC = () => {
   const router = createBrowserRouter([
@@ -29,7 +30,8 @@ const App: React.FC = () => {
         },
         {
           path: "/:id",
-          element: <SinglePage />
+          element: <SinglePage />,
+          loader: singlePageLoader,
         },
         {
           path: "/login",

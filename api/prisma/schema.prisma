@@ -22,7 +22,7 @@ model Post {
   title      String
   price      Int
   images     String[]
-  address    String
+  address    String? // Проверить это поле 
   city       String
   bedroom    Int
   bathroom   Int

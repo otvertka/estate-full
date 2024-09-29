@@ -1,31 +1,35 @@
 import React from 'react'
 import './singlePage.scss'
 import Slider from '../../components/slider/Slider'
-import { singlePostData, userData } from '../../lib/dummydata'
+import { userData } from '../../lib/dummydata'
 import MapComponent from '../../components/map/MapComponent'
+import { useLoaderData } from 'react-router-dom/dist/umd/react-router-dom.development'
 
 const SinglePage = () => {
+    const post = useLoaderData();
+    // console.log(post);
+
     return (
         <div className="singlePage">
             <div className="details">
                 <div className="wrapper">
-                    <Slider {...singlePostData} images={singlePostData.images} />
+                    <Slider {...post} images={post.images} />
                     <div className="info">
                         <div className="top">
                             <div className="post">
-                                <h1>{singlePostData.title}</h1>
+                                <h1>{post.title}</h1>
                                 <div className="address">
                                     <img src="/pin.png" alt="pinImage" />
-                                    <span>{singlePostData.address}</span>
+                                    <span>{post.address}</span>
                                 </div>
-                                <div className="price">$ {singlePostData.price}</div>
+                                <div className="price">$ {post.price}</div>
                             </div>
                             <div className="user">
                                 <img src={userData.img} alt="userImage" />
                                 <span>{userData.name}</span>
                             </div>
                         </div>
-                        <div className="bottom">{singlePostData.description}</div>
+                        <div className="bottom">{post.description}</div>
                     </div>
                 </div>
             </div>
@@ -97,7 +101,7 @@ const SinglePage = () => {
                     <p className="title">Location</p>
                     <div className="mapContainer">
                         {/* разобраться с типами */}
-                        <MapComponent items={[singlePostData]} />
+                        <MapComponent items={[post]} />
                     </div>
                     <div className="buttons">
                         <button>

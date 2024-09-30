@@ -12,7 +12,7 @@ import Register from "./pages/registerPage/register";
 import Login from "./pages/loginPage/login";
 import ProfileUpdatePage from "./pages/profileUpdatePage/profileUpdatePage";
 import NewPostPage from "./pages/newPostPage/newPostPage";
-import { singlePageLoader } from "./lib/loaders";
+import { listPageLoader, singlePageLoader } from "./lib/loaders";
 
 const App: React.FC = () => {
   const router = createBrowserRouter([
@@ -26,7 +26,8 @@ const App: React.FC = () => {
         },
         {
           path: "/list",
-          element: <ListPage />
+          element: <ListPage />,
+          loader: listPageLoader,
         },
         {
           path: "/:id",

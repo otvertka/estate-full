@@ -1,9 +1,10 @@
 import React from 'react'
 import './singlePage.scss'
 import Slider from '../../components/slider/Slider'
-import { userData } from '../../lib/dummydata'
+// import { userData } from '../../lib/dummydata'
 import MapComponent from '../../components/map/MapComponent'
-import { useLoaderData } from 'react-router-dom/dist/umd/react-router-dom.development'
+import { useLoaderData } from 'react-router-dom/dist/umd/react-router-dom.development';
+import DOMPurify from "dompurify";
 
 const SinglePage = () => {
     const post = useLoaderData();
@@ -25,11 +26,13 @@ const SinglePage = () => {
                                 <div className="price">$ {post.price}</div>
                             </div>
                             <div className="user">
-                                <img src={userData.img} alt="userImage" />
-                                <span>{userData.name}</span>
+                                <img src={post.user.avatar} alt="userImage" />
+                                <span>{post.user.username}</span>
                             </div>
                         </div>
-                        <div className="bottom">{post.description}</div>
+                        <div className="bottom" dangerouslySetInnerHTML={{
+                            __html: DOMPurify.sanitize(post.postDetail.desc),
+                        }}></div>
                     </div>
                 </div>
             </div>
@@ -41,21 +44,26 @@ const SinglePage = () => {
                             <img src="/utility.png" alt="utilityImage" />
                             <div className="featureText">
                                 <span>Utilities</span>
-                                <p>Renter is responsible</p>
+                                {post.postDetail.utilities === "owner" ? (
+                                    <p>Owner is responsible</p>) : (
+                                    <p>Tenant is responsible</p>
+                                )}
                             </div>
                         </div>
                         <div className="feature">
                             <img src="/pet.png" alt="petImage" className='images' />
                             <div className="featureText">
                                 <span>Pet Policy</span>
-                                <p>Pets Allowed</p>
+                                {post.postDetail.pet === "allowed" ?
+                                    <p>Pets Allowed</p> : <p>Pets not Allowed</p>
+                                }
                             </div>
                         </div>
                         <div className="feature">
                             <img src="/fee.png" alt="feeImage" />
                             <div className="featureText">
-                                <span>Property Fees</span>
-                                <p>Must have 3x the rent in total household income</p>
+                                <span>Income Policy</span>
+                                <p>{post.postDetail.income}</p>
                             </div>
                         </div>
                     </div>
@@ -63,15 +71,15 @@ const SinglePage = () => {
                     <div className="sizes">
                         <div className="size">
                             <img src="/size.png" alt="sizeImage" />
-                            <span>80 m2</span>
+                            <span>{post.postDetail.size}m2</span>
                         </div>
                         <div className="size">
                             <img src="/bed.png" alt="bedImage" />
-                            <span>2 beds</span>
+                            <span>{post.bedroom} beds</span>
                         </div>
                         <div className="size">
                             <img src="/bath.png" alt="bathImage" />
-                            <span>1 bathroom</span>
+                            <span>{post.bathroom} bathroom</span>
                         </div>
                     </div>
                     <p className="title">Nearby Places</p>
@@ -80,21 +88,23 @@ const SinglePage = () => {
                             <img src="/school.png" alt="schoolImage" />
                             <div className="featureText">
                                 <span>School</span>
-                                <p>250m away</p>
+                                <p>{post.postDetail.school > 999 ? post.postDetail.school / 1000 + "km" : post.postDetail.school + "m"} away</p>
                             </div>
                         </div>
                         <div className="feature">
                             <img src="/pet.png" alt="peImage" />
                             <div className="featureText">
                                 <span>Bus Stop</span>
-                                <p>100m away</p>
+                                <p>{post.postDetail.bus > 999 ? post.postDetail.bus / 1000 + "km" : post.postDetail.bus + "m"} away</p>
+
                             </div>
                         </div>
                         <div className="feature">
                             <img src="/fee.png" alt="feeImage" />
                             <div className="featureText">
                                 <span>Restaurant</span>
-                                <p>200m away</p>
+                                <p>{post.postDetail.restaurant > 999 ? post.postDetail.restaurant / 1000 + "km" : post.postDetail.restaurant + "m"} away</p>
+
                             </div>
                         </div>
                     </div>
@@ -115,7 +125,7 @@ const SinglePage = () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     )
 }
 

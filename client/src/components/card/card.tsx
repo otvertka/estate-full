@@ -4,11 +4,11 @@ import { Link } from 'react-router-dom';
 import { ListItemProps } from '../../types/types';
 
 
-const Card: React.FC<ListItemProps> = ({ id, img, title, address, price, bedroom, bathroom }) => {
+const Card: React.FC<ListItemProps> = ({ id, images, title, address, price, bedroom, bathroom }) => {
     return (
         <div className='card'>
             <Link to={`/${id}`} className='imageContainer'>
-                <img src={img} alt="apartmentImage" />
+                <img src={images[0]} alt="apartmentImage" />
             </Link>
             <div className="textContainer">
                 <h2 className="title">

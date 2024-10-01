@@ -2,7 +2,7 @@
 export type ListItemProps = {
         id: number;
         title: string;
-        img: string;
+        images: string[];
         bedroom: number;
         bathroom: number;
         price: number;
@@ -20,7 +20,7 @@ export type SingleItemProps = {
         address: string;
         latitude: number;
         longitude: number;
-        size: 861,
+        size: 861,  
         city: string,
         school: string,
         bus: string,

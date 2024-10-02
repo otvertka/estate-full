@@ -12,7 +12,7 @@ import Register from "./pages/registerPage/register";
 import Login from "./pages/loginPage/login";
 import ProfileUpdatePage from "./pages/profileUpdatePage/profileUpdatePage";
 import NewPostPage from "./pages/newPostPage/newPostPage";
-import { listPageLoader, singlePageLoader } from "./lib/loaders";
+import { listPageLoader, profilePageLoader, singlePageLoader } from "./lib/loaders";
 
 const App: React.FC = () => {
   const router = createBrowserRouter([
@@ -50,7 +50,8 @@ const App: React.FC = () => {
       children: [
         {
           path: "/profile",
-          element: <ProfilePage />
+          element: <ProfilePage />,
+          loader: profilePageLoader
         },
         {
           path: "/profile/update",

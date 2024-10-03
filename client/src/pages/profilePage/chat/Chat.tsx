@@ -1,43 +1,29 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import './chat.scss'
+import { AuthContext } from '../../../context/AuthContext';
 
 const Chat = ({ chats }) => {
-    const [chat, setChat] = useState(null);
+    const [chat, setChat] = useState(false);
     // console.log(chats);
+    const { currentUser } = useContext(AuthContext);
+
     return (
         <div className='chat'>
             <div className="messages">
                 <h1>Messages</h1>
-                <div className="message">
-                    <img src="https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-                        alt="profileImage" />
-                    <span>John Doe</span>
-                    <p>Lorem ipsum dolor sit amet...</p>
-                </div>
-                <div className="message">
-                    <img src="https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-                        alt="profileImage" />
-                    <span>John Doe</span>
-                    <p>Lorem ipsum dolor sit amet...</p>
-                </div>
-                <div className="message">
-                    <img src="https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-                        alt="profileImage" />
-                    <span>John Doe</span>
-                    <p>Lorem ipsum dolor sit amet...</p>
-                </div>
-                <div className="message">
-                    <img src="https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-                        alt="profileImage" />
-                    <span>John Doe</span>
-                    <p>Lorem ipsum dolor sit amet...</p>
-                </div>
-                <div className="message">
-                    <img src="https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-                        alt="profileImage" />
-                    <span>John Doe</span>
-                    <p>Lorem ipsum dolor sit amet...</p>
-                </div>
+                {chats?.map((c) => {
+                    (
+                        <div className="message" key={c.id} style={{
+                            backgroundColor: c.seenBy.includes(currentUser.id) ? "white" : "#fecd514e",
+                        }}>
+                            <img src={c.receiver.avatar || "/noavatar.jpg"}
+                                alt="profileImage" />
+                            <span>{c.receiver.username}</span>
+                            <p>{c.lastMessage}</p>
+                        </div>
+                    )
+                })}
+
             </div>
             {chat && <div className="chatBox">
                 <div className="top">
@@ -45,7 +31,7 @@ const Chat = ({ chats }) => {
                         <img src="https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="userImage" />
                         John Doe
                     </div>
-                    <span className="close" onClick={(event: React.MouseEvent<HTMLDivElement>) => setChat(null)}>X</span>
+                    <span className="close" onClick={(event: React.MouseEvent<HTMLDivElement>) => setChat(false)}>X</span>
                 </div>
                 <div className="center">
                     <div className="chatMessage">

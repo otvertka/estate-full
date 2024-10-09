@@ -1,8 +1,9 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import './chat.scss'
 import { AuthContext } from '../../../context/AuthContext';
 import apiRequest from '../../../lib/apiRequest';
 import { format } from "timeago.js";
+import { SocketContext } from '../../../context/SocketContext';
 
 interface Message {
     id: string;
@@ -30,8 +31,13 @@ interface ChatProps {
 
 const Chat: React.FC<ChatProps> = ({ chats }) => {
     const [chat, setChat] = useState<Chat | null>(null);
-    console.log(chats);
+    // console.log(chats);
     const { currentUser } = useContext(AuthContext);
+    const { socket } = useContext(SocketContext);
+
+    const formRef = useRef<HTMLFormElement>(null);  // Создаем ref для формы
+
+
 
     const handleOpenChat = async (id: string, receiver) => {
         try {
@@ -52,11 +58,37 @@ const Chat: React.FC<ChatProps> = ({ chats }) => {
         try {
             const res = await apiRequest.post("/messages/" + chat.id, { text });
             setChat((prev) => ({ ...prev!, messages: [...(prev?.messages || []), res.data] }));
-            e.currentTarget.reset();
+
+            formRef.current?.reset();
+
+            socket.emit("sendMessage", {
+                receiverId: chat.receiver.id,
+                data: res.data,
+            })
         } catch (err) {
             console.log(err);
         }
     }
+
+    useEffect(() => {
+        if (chat && socket) {
+            socket.on("getMessage", (data) => {
+                if (chat.id === data.chatId) {
+                    setChat((prev) => {
+                        if (!prev) return null;
+                        return {
+                            ...prev,
+                            messages: [...prev.messages, data],
+                        };
+                    });
+                }
+            });
+        }
+
+        return () => {
+            socket.off("getMessage");
+        };
+    }, [socket, chat]);
 
     return (
         <div className='chat'>

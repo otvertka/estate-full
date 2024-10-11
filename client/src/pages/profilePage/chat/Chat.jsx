@@ -75,6 +75,7 @@ function Chat({ chats }) {
         };
     }, [socket, chat]);
 
+    console.log(chats);
     return (
         <div className="chat">
             <div className="messages">
@@ -85,9 +86,7 @@ function Chat({ chats }) {
                         key={c.id}
                         style={{
                             backgroundColor:
-                                c.seenBy.includes(currentUser.id) || chat?.id === c.id
-                                    ? "white"
-                                    : "#fecd514e",
+                                c.seenBy.includes(currentUser.id) || chat?.id === c.id ? "white" : "#fecd514e",
                         }}
                         onClick={() => handleOpenChat(c.id, c.receiver)}
                     >

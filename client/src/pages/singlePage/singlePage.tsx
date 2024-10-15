@@ -10,9 +10,13 @@ import apiRequest from '../../lib/apiRequest';
 
 const SinglePage = () => {
     const post = useLoaderData();
+    console.log(post);
     const [saved, setSaved] = useState(post.isSaved);
     const { currentUser } = useContext(AuthContext);
     const navigate = useNavigate();
+
+    const previewImages = post.images.slice(0, 4);
+
 
     const handleSave = async () => {
         if (!currentUser) {
@@ -27,10 +31,36 @@ const SinglePage = () => {
         }
     }
 
+    const handleDelete = async () => {
+        if (!currentUser) {
+            navigate("/login");
+            return;
+        }
+
+        const isConfirmed = window.confirm("Are you sure you want to delete this post?");
+        if (!isConfirmed) {
+            return;
+        }
+
+        try {
+            const response = await apiRequest.delete(`/posts/${post.id}`, {
+                withCredentials: true,
+            });
+            if (response.status === 200) {
+                alert('Post deleted successfully');
+                navigate("/profile");
+            }
+        } catch (err) {
+            console.log('Failed to delete post:', err)
+            alert('Failed to delete post !')
+        }
+    }
+
     return (
         <div className="singlePage">
             <div className="details">
                 <div className="wrapper">
+
                     <Slider {...post} images={post.images} />
                     <div className="info">
                         <div className="top">
@@ -88,7 +118,7 @@ const SinglePage = () => {
                     <div className="sizes">
                         <div className="size">
                             <img src="/size.png" alt="sizeImage" />
-                            <span>{post.postDetail.size}m2</span>
+                            <span>{post.postDetail.size}m²</span>
                         </div>
                         <div className="size">
                             <img src="/bed.png" alt="bedImage" />
@@ -141,6 +171,10 @@ const SinglePage = () => {
                             }}>
                             <img src="/save.png" alt="saveImage" />
                             {saved ? "Place Saved" : "Save the Place"}
+                        </button>
+                        <button onClick={handleDelete} >
+                            <img src="../../../public/delete.png" />
+                            Delete Post
                         </button>
                     </div>
                 </div>

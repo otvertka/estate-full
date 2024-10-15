@@ -9,6 +9,9 @@ export type ListItemProps = {
         address: string;
         latitude: number;
         longitude: number;
+        isSaved: boolean,
+        // onDelete: string,
+
 }
 export type SingleItemProps = {
         id: number;

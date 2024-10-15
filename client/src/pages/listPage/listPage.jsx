@@ -26,7 +26,6 @@ function ListPage() {
                             {(postResponse) =>
                                 postResponse.data.map((post) => (
                                     <Card key={post.id} {...post} />
-
                                 ))
                             }
                         </Await>
@@ -48,8 +47,3 @@ function ListPage() {
 }
 
 export default ListPage
-
-
-// {posts.map((item: ListItemProps) => (
-//     <Card key={item.id} {...item} />
-// ))}

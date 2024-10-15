@@ -140,7 +140,7 @@ function NewPostPage() {
                             />
                         </div>
                         <div className="item">
-                            <label htmlFor="size">Total Size (sqft)</label>
+                            <label htmlFor="size">Total Size (m²)</label>
                             <input min={0} id="size" name="size" type="number" />
                         </div>
                         <div className="item">
@@ -162,15 +162,15 @@ function NewPostPage() {
             </div>
             <div className="sideContainer">
                 {images.map((image, index) => (
-                    <img src={image} key={index} alt="" />
+                    <img src={image} key={index} alt="estate image" />
                 ))}
                 <UploadWidget
                     uwConfig={{
                         cloudName: "otvertka",
                         uploadPreset: "estate",
-                        multiple: false,
+                        multiple: true,
                         maxImageFileSize: 2000000,
-                        folder: "avatars",
+                        folder: "posts",
                     }}
                     setState={setImages}
                 />

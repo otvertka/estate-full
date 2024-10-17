@@ -14,7 +14,7 @@ const HomePage: React.FC = () => {
                     <h1 className="title">
                         Find Real Estate & Get Your Dream Place
                     </h1>
-                    <p>Lorsimilique ipsa libero dssitatibibero, eveniet commodi voluptatum quaerat officiis, excepturi ab repellat. In necessitatibus magni repellendus adipisci, deleniti earum sapiente quisquam vero, illo quia id, corrupti libero. Ducimus nisi libero fugiat quidem animi assumenda facere debitis nam, inventore, quia culpa ipsum.</p>
+                    <p>Find your dream home with City Realty, your trusted partner for buying, selling, and renting properties. With our expert team and a vast selection of listings, we make your real estate journey seamless and stress-free.</p>
                     <SearchBar />
                     <div className="boxes">
                         <div className="box">

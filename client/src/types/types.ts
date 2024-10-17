@@ -3,6 +3,7 @@ export type ListItemProps = {
         id: number;
         title: string;
         images: string[];
+        img: string,
         bedroom: number;
         bathroom: number;
         price: number;

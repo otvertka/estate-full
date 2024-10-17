@@ -26,7 +26,7 @@ const MapComponent: React.FC<MapProps> = ({ items }) => {
                     key={item.id}
                     id={item.id}
                     title={item.title}
-                    // img={'img' in item ? item.img : item.images[0]}  // Handle img or images
+                    img={item.images[0]}  // Handle img or images
                     images={item.images}  // Handle img or images
                     bedroom={'bedroom' in item ? item.bedroom : item.bedRooms}
                     bathroom={item.bathroom}

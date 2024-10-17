@@ -15,7 +15,7 @@ const SinglePage = () => {
     const { currentUser } = useContext(AuthContext);
     const navigate = useNavigate();
 
-    const previewImages = post.images.slice(0, 4);
+    // const previewImages = post.images.slice(0, 4);
 
 
     const handleSave = async () => {
@@ -53,6 +53,19 @@ const SinglePage = () => {
         } catch (err) {
             console.log('Failed to delete post:', err)
             alert('Failed to delete post !')
+        }
+    }
+
+    const handleEdit = async () => {
+        if (!currentUser) {
+            navigate("/login");
+            return;
+        }
+
+        try {
+
+        } catch (err) {
+            console.log(err)
         }
     }
 
@@ -175,6 +188,10 @@ const SinglePage = () => {
                         <button onClick={handleDelete} >
                             <img src="../../../public/delete.png" />
                             Delete Post
+                        </button>
+                        <button onClick={handleEdit} >
+                            {/* <img src="../../../public/delete.png" /> */}
+                            Edit Post
                         </button>
                     </div>
                 </div>

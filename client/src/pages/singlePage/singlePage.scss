@@ -195,20 +195,31 @@
       .buttons {
         display: flex;
         justify-content: space-between;
-
         button {
-          padding: 20px;
+          padding: 15px;
           display: flex;
           align-items: center;
           gap: 5px;
           background-color: white;
-          border: 1px solid #fece51;
+          border: 1px solid rgba(254, 205, 81, 0.168);
           border-radius: 5px;
           cursor: pointer;
+          font-size: 14px;
+          transition: all 0.5s ease;
+          &:hover {
+            scale: 1.05;
+            font-weight: 400;
+            border: 1px solid #fddaca;
+            background-color: #fce8df;
+          }
 
           img {
             width: 16px;
             height: 16px;
+            transition: transform 0.5s ease;
+            &:hover {
+              transform: rotate(360deg);
+            }
           }
         }
       }

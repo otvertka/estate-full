@@ -61,12 +61,7 @@ const SinglePage = () => {
             navigate("/login");
             return;
         }
-
-        try {
-
-        } catch (err) {
-            console.log(err)
-        }
+        navigate(`/edit/${post.id}`)
     }
 
     return (
@@ -83,7 +78,7 @@ const SinglePage = () => {
                                     <img src="/pin.png" alt="pinImage" />
                                     <span>{post.address}</span>
                                 </div>
-                                <div className="price">$ {post.price}</div>
+                                <div className="price">€ {post.price}</div>
                             </div>
                             <div className="user">
                                 <img src={post.user.avatar} alt="userImage" />
@@ -170,7 +165,6 @@ const SinglePage = () => {
                     </div>
                     <p className="title">Location</p>
                     <div className="mapContainer">
-                        {/* разобраться с типами */}
                         <MapComponent items={[post]} />
                     </div>
                     <div className="buttons">
@@ -190,7 +184,7 @@ const SinglePage = () => {
                             Delete Post
                         </button>
                         <button onClick={handleEdit} >
-                            {/* <img src="../../../public/delete.png" /> */}
+                            <img src="../../../public/edit-icon.svg" />
                             Edit Post
                         </button>
                     </div>

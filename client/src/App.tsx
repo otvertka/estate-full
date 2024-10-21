@@ -11,8 +11,9 @@ import ProfilePage from "./pages/profilePage/profilePage";
 import Register from "./pages/registerPage/register";
 import Login from "./pages/loginPage/login";
 import ProfileUpdatePage from "./pages/profileUpdatePage/profileUpdatePage";
-import NewPostPage from "./pages/newPostPage/newPostPage";
+// import NewPostPage from "./pages/newPostPage/PostFormPage";
 import { listPageLoader, profilePageLoader, singlePageLoader } from "./lib/loaders";
+import PostFormPage from "./pages/PostFormPage/PostFormPage";
 
 const App: React.FC = () => {
   const router = createBrowserRouter([
@@ -59,8 +60,12 @@ const App: React.FC = () => {
         },
         {
           path: "/add",
-          element: <NewPostPage />
-        }
+          element: <PostFormPage isEditing={false} />
+        },
+        {
+          path: "/edit/:postId",
+          element: <PostFormPage isEditing={true} />
+        },
       ]
     }
   ]);

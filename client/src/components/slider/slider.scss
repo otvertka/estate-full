@@ -5,6 +5,12 @@
   height: 350px;
   display: flex;
   gap: 20px;
+  // img {
+  //   transition: all 0.5s ease;
+  //   &:hover {
+  //     scale: 1.05;
+  //   }
+  // }
 
   .fullSlider {
     position: absolute;
@@ -73,6 +79,10 @@
 
     img {
       height: 100px;
+      transition: all 0.5s ease;
+      &:hover {
+        scale: 1.05;
+      }
     }
   }
 }

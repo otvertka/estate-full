@@ -9,9 +9,13 @@
       cursor: pointer;
       background-color: white;
       text-transform: capitalize;
+      transition: all 0.5s ease;
+      &:hover {
+        scale: 1.05;
+      }
 
       &.active {
-        background-color: black;
+        background-color: #666666;
         color: white;
       }
 
@@ -43,6 +47,7 @@
       padding: 0px 10px;
       border: none;
       width: 200px;
+      transition: all 1s ease;
 
       @include lg {
         padding: 0px 5px;
@@ -78,9 +83,14 @@
     a {
       flex: 1;
       background-color: #fece51;
+      border-radius: 5px;
       display: flex;
       align-items: center;
       justify-content: center;
+      transition: all 0.5s ease;
+      &:hover {
+        scale: 1.05;
+      }
 
       button {
         border: none;

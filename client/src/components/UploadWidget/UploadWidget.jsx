@@ -27,12 +27,22 @@ function UploadWidget({ uwConfig, setPublicId, setState }) {
 
     const initializeCloudinaryWidget = () => {
         if (loaded) {
-            var myWidget = window.cloudinary.createUploadWidget(
+            const myWidget = window.cloudinary.createUploadWidget(
                 uwConfig,
                 (error, result) => {
                     if (!error && result && result.event === "success") {
                         console.log("Done! Here is the image info: ", result.info);
-                        setState(prev => [...prev, result.info.secure_url])
+                        // Замена старых изображений на новые
+                        setState((prev) => {
+                            // Если это первая загруженная картинка, очищаем список старых картинок
+                            if (prev.length === 0) {
+                                return [result.info.secure_url];
+                            } else {
+                                // Добавляем новые изображения
+                                return [...prev, result.info.secure_url];
+                            }
+                        });
+
                     }
                 }
             );
@@ -40,6 +50,8 @@ function UploadWidget({ uwConfig, setPublicId, setState }) {
             document.getElementById("upload_widget").addEventListener(
                 "click",
                 function () {
+                    // Очищаем предыдущие изображения перед загрузкой новых
+                    setState([]);
                     myWidget.open();
                 },
                 false

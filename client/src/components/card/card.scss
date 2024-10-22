@@ -5,10 +5,16 @@
   gap: 20px;
   border: 1px solid #e7e7e7;
   border-radius: 5px;
+  padding: 5px;
 
   .imageContainer {
     flex: 2;
     height: 200px;
+    transition: all 0.4s ease;
+    scale: 1;
+    &:hover {
+      scale: 1.05;
+    }
 
     @include sm {
       display: none;
@@ -57,7 +63,7 @@
       font-weight: 300;
       padding: 5px;
       border-radius: 5px;
-      background-color: burlywood;
+      background-color: #cccccc;
       width: max-content;
     }
 
@@ -85,13 +91,14 @@
         gap: 20px;
 
         .icon {
-          border: 1px solid #999;
+          // border: 1px solid #999;
           padding: 2px 5px;
           border-radius: 5px;
           cursor: pointer;
           display: flex;
           align-items: center;
           justify-content: center;
+          transition: all 0.4s ease;
 
           &:hover {
             background-color: lightgray;

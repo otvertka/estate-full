@@ -23,10 +23,10 @@ const Navbar = () => {
                     <img src='/public/images/navbar/logo1.png' alt='logoImage' />
                     <span>CityRealty</span>
                 </a>
-                <a href='/'>Home</a>
-                <a href='/'>About</a>
-                <a href='/'>Contact</a>
-                <a href='/'>Agents</a>
+                <a className='nav-link' href='/'>Home</a>
+                <a className='nav-link' href='/'>About</a>
+                <a className='nav-link' href='/'>Contact</a>
+                <a className='nav-link' href='/'>Agents</a>
             </div>
             <div className='right'>
                 {currentUser ? (
@@ -44,16 +44,25 @@ const Navbar = () => {
                     </>
                 )
                 }
+
                 <div className='menuIcon'>
-                    <img src='/public/menu.png' alt='burgerImage' onClick={() => setOpen(!open)} />
+                    <div className={open ? "burger open" : "burger"} onClick={() => setOpen(!open)}>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
                 </div>
                 <div className={open ? "menu active" : "menu"}>
                     <a href='/'>Home</a>
                     <a href='/'>About</a>
                     <a href='/'>Contact</a>
                     <a href='/'>Agents</a>
-                    <a href='/'>Sign in</a>
-                    <a href='/'>Sign up</a>
+                    {!currentUser && (
+                        <>
+                            <a href='/login'>Sign in</a>
+                            <a href='/register'>Sign up</a>
+                        </>
+                    )}
                 </div>
             </div>
         </nav>

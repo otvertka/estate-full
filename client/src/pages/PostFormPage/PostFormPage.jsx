@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import "./PostFormPage.scss";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css"
-
 import { useNavigate } from "react-router-dom";
 import apiRequest from "../../lib/apiRequest";
 import UploadWidget from "../../components/UploadWidget/UploadWidget";
@@ -10,30 +9,24 @@ import { useParams } from "react-router-dom";
 
 function PostFormPage({ isEditing = false }) {
     const { postId } = useParams();
-    console.log(postId);
-
-    const [postData, setPostData] = useState({}); // Инициализация состояния для данных поста
+    const [postData, setPostData] = useState({});
     const [postDetail, setPostDetail] = useState({});
     const [value, setValue] = useState("");
     const [images, setImages] = useState([]);
     const [error, setError] = useState("");
 
     const navigate = useNavigate();
-
-    // Если режим редактирования, загружаем данные поста
     useEffect(() => {
         if (isEditing && postId) {
             const fetchPostData = async () => {
                 try {
                     const response = await apiRequest.get(`/posts/${postId}`);
-                    console.log(response);
-
                     setPostData(response.data);
                     setPostDetail(response.data.postDetail);
                     setValue(response.data.postDetail.desc);
                     setImages(response.data.images || []);
                 } catch (err) {
-                    console.log(err);
+                    console.error(err);
                     setError("Failed to load post data");
                 }
             };
@@ -49,8 +42,6 @@ function PostFormPage({ isEditing = false }) {
             [name]: type === 'number' ? parseInt(value) : value,
         }));
     };
-    console.log(postDetail);
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         const formData = new FormData(e.target);
@@ -114,14 +105,10 @@ function PostFormPage({ isEditing = false }) {
                 navigate("/" + res.data.id);
             }
         } catch (err) {
-            console.log(err);
+            console.error(err);
             setError(err);
         }
-
-        // Проверка состояния перед отправкой
-        console.log('Post data before submit:', postData);
-        console.log('Post detail before submit:', postDetail);
-    }
+    };
 
 
 
@@ -184,8 +171,7 @@ function PostFormPage({ isEditing = false }) {
                                 <option value="land">Land</option>
                             </select>
                         </div>
-                        {/* /////// поля postDetail */}
-
+                        
                         <div className="item">
                             <label htmlFor="utilities">Utilities Policy</label>
                             <select name="utilities" value={postDetail.utilities || "owner"} onChange={handleDetailChange}>
@@ -232,7 +218,7 @@ function PostFormPage({ isEditing = false }) {
                 </div>
             </div>
             <div className="sideContainer">
-                {images.slice(1, 4).map((image, index) => (
+                {images.slice(1, 2).map((image, index) => (
                     <img src={image} key={index} alt="estate image" />
                 ))}
                 <UploadWidget

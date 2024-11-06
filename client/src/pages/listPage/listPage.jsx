@@ -1,17 +1,13 @@
 import React, { Suspense } from 'react'
 import './listPage.scss'
-
 import Filter from '../../components/filter/filter';
 import Card from '../../components/card/card';
-// import { ListItemProps } from '../../types/types';
 import MapComponent from '../../components/map/MapComponent';
 import { useLoaderData } from 'react-router-dom';
 import { Await } from 'react-router-dom';
-// import { clearConfig } from 'dompurify';
 
 function ListPage() {
     const data = useLoaderData();
-    console.log(data.postResponse);
 
     return (
         <div className="listPage">

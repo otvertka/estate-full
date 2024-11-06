@@ -5,17 +5,14 @@ import { ListItemProps } from '../../types/types';
 import { AuthContext } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom/dist/umd/react-router-dom.development';
 import apiRequest from '../../lib/apiRequest';
-// import axios from 'axios';
 
 
 const Card: React.FC<ListItemProps> = ({ id, images, title, address, price, bedroom, bathroom, isSaved }) => {
-
     const [saved, setSaved] = useState(isSaved);
     const { currentUser } = useContext(AuthContext);
     const navigate = useNavigate();
 
     const handleSave = async () => {
-        console.log("I am clicked!");
         if (!currentUser) {
             navigate("/login");
             return;
@@ -25,23 +22,11 @@ const Card: React.FC<ListItemProps> = ({ id, images, title, address, price, bedr
             await apiRequest.post("/users/save", { postId: id });
             navigate("/profile");
         } catch (err) {
-            console.log(err);
+            console.error(err);
             setSaved((prev) => !prev);
         }
     }
 
-
-    // const handleDelete = async () => {
-    //     try {
-    //         const response = await axios.delete(`http://localhost:8800/api/posts/${id}`, {
-    //             withCredentials: true,
-    //         });
-    //         if (response.)
-    //     } catch (err) {
-    //         console.log('Failed to delete post:', err);
-    //         alert('Failed to delete post')
-    //     }
-    // }
     return (
         <div className='card'>
             <Link to={`/${id}`} className='imageContainer'>
@@ -74,9 +59,6 @@ const Card: React.FC<ListItemProps> = ({ id, images, title, address, price, bedr
                         <div className="icon">
                             <img src="/public/chat.png" alt="chatImage" />
                         </div>
-                        {/* <div className="icon">
-                            <img src="/public/delete.png" alt="deleteImage" />
-                        </div> */}
                     </div>
                 </div>
             </div>

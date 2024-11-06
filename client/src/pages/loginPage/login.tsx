@@ -1,14 +1,12 @@
 import React, { useContext, useState } from "react";
 import "./login.scss";
 import { Link, useNavigate } from "react-router-dom";
-// import axios from "axios";
 import apiRequest from "../../lib/apiRequest";
 import { AuthContext } from "../../context/AuthContext";
 
 const Login = () => {
     const [error, setError] = useState("");
     const [isLoading, setIsLoading] = useState(false);
-
     const { updateUser } = useContext(AuthContext);
 
     const navigate = useNavigate();
@@ -21,19 +19,15 @@ const Login = () => {
 
         const username = formData.get("username");
         const password = formData.get("password");
-        console.log(username, password);
         try {
             const res = await apiRequest.post("/auth/login", {
                 username,
                 password
-            })
-            // console.log(res.data);
-
+            });
             updateUser(res.data);
-
             navigate("/");
         } catch (err) {
-            console.log(err);
+            console.error(err);
             setError(err.response.data.message);
         } finally {
             setIsLoading(false);

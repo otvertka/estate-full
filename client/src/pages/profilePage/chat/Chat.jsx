@@ -29,7 +29,7 @@ function Chat({ chats }) {
             }
             setChat({ ...res.data, receiver });
         } catch (err) {
-            console.log(err);
+            console.error(err);
         }
     };
 
@@ -49,7 +49,7 @@ function Chat({ chats }) {
                 data: res.data,
             });
         } catch (err) {
-            console.log(err);
+            console.error(err);
         }
     };
 
@@ -58,7 +58,7 @@ function Chat({ chats }) {
             try {
                 await apiRequest.put("/chats/read/" + chat.id);
             } catch (err) {
-                console.log(err);
+                console.error(err);
             }
         };
 
@@ -75,7 +75,6 @@ function Chat({ chats }) {
         };
     }, [socket, chat]);
 
-    console.log(chats);
     return (
         <div className="chat">
             <div className="messages">

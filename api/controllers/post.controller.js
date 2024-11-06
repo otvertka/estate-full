@@ -22,7 +22,7 @@ export const getPosts = async (req, res) => {
         res.status(200).json(posts);
         // }, 3000);
     } catch (err) {
-        console.log(err);
+        console.error(err);
         res.status(500).json({ message: "Failed to get posts" });
     }
 };
@@ -69,7 +69,7 @@ export const getPost = async (req, res) => {
             return res.status(200).json({ ...post, isSaved: false });
         }
     } catch (err) {
-        console.log(err);
+        console.error(err);
         res.status(500).json({ message: "Failed to get post" });
     }
 };
@@ -91,17 +91,53 @@ export const addPost = async (req, res) => {
         });
         res.status(200).json(newPost);
     } catch (err) {
-        console.log(err);
+        console.error(err);
         res.status(500).json({ message: "Failed to create post" });
     }
 };
 
 export const updatePost = async (req, res) => {
+    const id = req.params.id; // ID поста
+    const { postData, postDetail } = req.body; // Получаем и postData, и postDetail из тела запроса
+    const tokenUserId = req.userId;
+
     try {
-        res.status(200).json();
+        const post = await prisma.post.findUnique({
+            where: { id },
+            include: { postDetail: true }, // Включаем связанные детали поста
+        });
+
+        if (!post) {
+            return res.status(404).json({ message: "Post not found!" });
+        }
+
+        // Проверяем, что текущий пользователь — владелец поста
+        if (post.userId !== tokenUserId) {
+            return res.status(403).json({ message: "Not Authorized!" });
+        }
+
+        // Обновляем данные поста
+        const updatedPost = await prisma.post.update({
+            where: { id },
+            data: {
+                ...postData, // Обновляем postData
+            },
+        });
+
+        // Обновляем данные деталей поста, если они переданы
+        if (postDetail && post.postDetail) {
+            await prisma.postDetail.update({
+                where: { id: post.postDetail.id }, // Используем id существующего объекта postDetail
+                data: {
+                    ...postDetail, // Обновляем поля postDetail
+                },
+            });
+        }
+
+        res.status(200).json(updatedPost);
     } catch (err) {
-        console.log(err);
-        res.status(500).json({ message: "Failed to update posts" });
+        console.error(err);
+        res.status(500).json({ message: "Failed to update post" });
     }
 };
 
@@ -124,7 +160,7 @@ export const deletePost = async (req, res) => {
 
         res.status(200).json({ message: "Post deleted" });
     } catch (err) {
-        console.log(err);
+        console.error(err);
         res.status(500).json({ message: "Failed to delete post" });
     }
 };

@@ -1,8 +1,8 @@
 * {
   padding: 0;
   margin: 0;
-  box-sizing: border-box;
-  font-size: 25px;
+  /* box-sizing: border-box; */
+  /* font-size: 25px; */
 }
 
 a {
@@ -13,4 +13,4 @@ a {
 body {
   font-family: "Lato", sans-serif;
   overflow: hidden;
-}/*# sourceMappingURL=index.css.map */
+} /*# sourceMappingURL=index.css.map */

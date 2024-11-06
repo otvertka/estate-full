@@ -1,7 +1,6 @@
 import React, { useContext, useState } from 'react'
 import './singlePage.scss'
 import Slider from '../../components/slider/Slider'
-// import { userData } from '../../lib/dummydata'
 import MapComponent from '../../components/map/MapComponent'
 import { useLoaderData, useNavigate } from 'react-router-dom/dist/umd/react-router-dom.development';
 import DOMPurify from "dompurify";
@@ -10,14 +9,9 @@ import apiRequest from '../../lib/apiRequest';
 
 const SinglePage = () => {
     const post = useLoaderData();
-    console.log(post);
     const [saved, setSaved] = useState(post.isSaved);
     const { currentUser } = useContext(AuthContext);
     const navigate = useNavigate();
-
-    // const previewImages = post.images.slice(0, 4);
-
-
     const handleSave = async () => {
         if (!currentUser) {
             navigate("/login");
@@ -26,7 +20,7 @@ const SinglePage = () => {
         try {
             await apiRequest.post("/users/save", { postId: post.id });
         } catch (err) {
-            console.log(err);
+            console.error(err);
             setSaved((prev) => !prev);
         }
     }
@@ -51,7 +45,7 @@ const SinglePage = () => {
                 navigate("/profile");
             }
         } catch (err) {
-            console.log('Failed to delete post:', err)
+            console.error('Failed to delete post:', err)
             alert('Failed to delete post !')
         }
     }
@@ -68,7 +62,6 @@ const SinglePage = () => {
         <div className="singlePage">
             <div className="details">
                 <div className="wrapper">
-
                     <Slider {...post} images={post.images} />
                     <div className="info">
                         <div className="top">
@@ -168,24 +161,25 @@ const SinglePage = () => {
                         <MapComponent items={[post]} />
                     </div>
                     <div className="buttons">
-                        <button>
+                        <button data-tooltip="Message">
                             <img src="/chat.png" alt="chatImage" />
-                            Send a Message
+                            <span>Send a Message</span>
                         </button>
                         <button onClick={handleSave}
                             style={{
                                 backgroundColor: saved ? "#fece51" : "white",
-                            }}>
+                            }}
+                            data-tooltip="Save the Place">
                             <img src="/save.png" alt="saveImage" />
-                            {saved ? "Place Saved" : "Save the Place"}
+                            <span>{saved ? "Place Saved" : "Save the Place"}</span>
                         </button>
-                        <button onClick={handleDelete} >
+                        <button onClick={handleDelete} data-tooltip="Delete Post">
                             <img src="../../../public/delete.png" />
-                            Delete Post
+                            <span>Delete Post</span>
                         </button>
-                        <button onClick={handleEdit} >
+                        <button onClick={handleEdit} data-tooltip="Edit Post">
                             <img src="../../../public/edit-icon.svg" />
-                            Edit Post
+                            <span>Edit Post</span>
                         </button>
                     </div>
                 </div>

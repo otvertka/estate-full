@@ -8,11 +8,8 @@ import { useNotificationStore } from "../../lib/notificationStore"
 const Navbar = () => {
     const [open, setOpen] = useState<boolean>(false);
     const { currentUser } = useContext(AuthContext);
-
     const fetch = useNotificationStore((state) => state.fetch);
     const number = useNotificationStore((state) => state.number);
-
-    console.log(number)
 
     if (currentUser) fetch();
 
@@ -23,7 +20,6 @@ const Navbar = () => {
                     <img src='/public/images/navbar/logo1.png' alt='logoImage' />
                     <span>CityRealty</span>
                 </a>
-                <a className='nav-link' href='/'>Home</a>
                 <a className='nav-link' href='/'>About</a>
                 <a className='nav-link' href='/'>Contact</a>
                 <a className='nav-link' href='/'>Agents</a>
@@ -34,13 +30,13 @@ const Navbar = () => {
                         <img src={currentUser.avatar || "/noavatar.jpg"} alt="userPhoto" />
                         <span>{currentUser.username}</span>
                         <Link to="/profile" className='profile'>
-                            <div className="notification">{number}</div>
+                            {number > 0 && <div className="notification">{number}</div>}
                             <span>Profile</span>
                         </Link>
                     </div>) : (
                     <>
-                        <a href='/login'>Sign in</a>
-                        <a href='/register' className='register'>Sign up</a>
+                        <a href='/login' className='authButton'>Sign in</a>
+                        <a href='/register' className='authButton register'>Sign up</a>
                     </>
                 )
                 }
@@ -53,6 +49,7 @@ const Navbar = () => {
                     </div>
                 </div>
                 <div className={open ? "menu active" : "menu"}>
+                    <a href='/profile'>Profile</a>
                     <a href='/'>Home</a>
                     <a href='/'>About</a>
                     <a href='/'>Contact</a>

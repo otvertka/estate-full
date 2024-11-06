@@ -30,7 +30,7 @@ export const getChats = async (req, res) => {
 
         res.status(200).json(chats);
     } catch (err) {
-        console.log(err);
+        console.error(err);
         res.status(500).json({ message: "Failed to get chats!" });
     }
 };
@@ -67,7 +67,7 @@ export const getChat = async (req, res) => {
         });
         res.status(200).json(chat);
     } catch (err) {
-        console.log(err);
+        console.error(err);
         res.status(500).json({ message: "Failed to get chat!" });
     }
 };
@@ -82,7 +82,7 @@ export const addChat = async (req, res) => {
         });
         res.status(200).json(newChat);
     } catch (err) {
-        console.log(err);
+        console.error(err);
         res.status(500).json({ message: "Failed to add chat!" });
     }
 };
@@ -107,7 +107,7 @@ export const readChat = async (req, res) => {
         });
         res.status(200).json(chat);
     } catch (err) {
-        console.log(err);
+        console.error(err);
         res.status(500).json({ message: "Failed to read chat!" });
     }
 };

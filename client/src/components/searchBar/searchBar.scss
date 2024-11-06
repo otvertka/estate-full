@@ -37,6 +37,7 @@
     justify-content: space-between;
     height: 64px;
     gap: 5px;
+    border-radius: 0 5px 5px 4px;
 
     @include sm {
       flex-direction: column;
@@ -48,6 +49,12 @@
       border: none;
       width: 200px;
       transition: all 1s ease;
+
+      &::placeholder {
+        font-size: medium;
+        color: #7f7f7e;
+        opacity: 1;
+      }
 
       @include lg {
         padding: 0px 5px;
@@ -82,20 +89,25 @@
 
     a {
       flex: 1;
-      background-color: #fece51;
+      background-color: #ffc32b;
       border-radius: 5px;
       display: flex;
       align-items: center;
       justify-content: center;
       transition: all 0.5s ease;
       &:hover {
-        scale: 1.05;
+        scale: 1.04;
+        background-color: #ffc32b;
       }
 
       button {
         border: none;
         cursor: pointer;
-        background-color: #fece51;
+        background-color: #ffc32b;
+
+        &:hover {
+          background-color: #ffc32b;
+        }
 
         @include sm {
           padding: 10px;

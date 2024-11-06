@@ -4,8 +4,6 @@ import prisma from "../lib/prisma.js";
 
 export const register = async (req, res) => {
     const { username, email, password } = req.body;
-    console.log(req.body);
-
     try {
 
         //HASH THE PASSWORD
@@ -19,11 +17,9 @@ export const register = async (req, res) => {
                 password: hashedPassword
             }
         });
-
-        console.log(newUser);
         res.status(201).json({ message: "Benutzer erfolgreich erstellt (User created successfully)" });
     } catch (err) {
-        console.log(err);
+        console.error(err);
         res.status(500).json({ message: "Fehler bei der Benutzererstellung (user creation error)" })
     }
 
@@ -32,20 +28,14 @@ export const register = async (req, res) => {
 export const login = async (req, res) => {
     const { username, password } = req.body;
     try {
-        // CHECK IF THE USER EXIST
         const user = await prisma.user.findUnique({
             where: { username }
         });
 
         if (!user) return res.status(401).json({ message: "Invalid Credentials!" });
-
-        // CHECK IF THE PASSWORD IS CORRECT
         const isPasswordValid = await bcrypt.compare(password, user.password);
 
         if (!isPasswordValid) return res.status(401).json({ message: "Invalid Credentials!" })
-
-        // GENERATE COOKIE TOKEN AND SEND TO THE USER
-        // res.setHeader("Set-Cookie", "test=" + "myValue").json("succsess");
         const age = 1000 * 60 * 60 * 24 * 7;
 
         const token = jwt.sign({
@@ -59,12 +49,11 @@ export const login = async (req, res) => {
 
         res.cookie("token", token, {
             httpOnly: true,
-            // secure: true
             maxAge: age,
         }).status(200).json(userInfo)
 
     } catch (err) {
-        console.log(err);
+        console.error(err);
         res.status(500).json({ message: "Anmeldung fehlgeschlagen (failed to login)!" })
     }
 }

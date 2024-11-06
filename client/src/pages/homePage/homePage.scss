@@ -2,7 +2,7 @@
 
 .homePage {
   display: flex;
-  // height: 100%;
+  height: 100%;
 
   .textContainer {
     flex: 3;
@@ -26,6 +26,15 @@
 
     .title {
       font-size: 64px;
+      background-image: linear-gradient(
+        90deg,
+        #ff0303,
+        #00030c
+      ); // Устанавливаем градиент
+      -webkit-background-clip: text; // Поддержка для WebKit-браузеров (Chrome, Safari)
+      -webkit-text-fill-color: transparent; // Прозрачный текст для отображения градиента
+      background-clip: text; // Основное свойство
+      color: transparent; // Поддержка для Firefox
 
       @include lg {
         font-size: 48px;

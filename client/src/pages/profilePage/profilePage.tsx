@@ -1,32 +1,26 @@
-import React, { Suspense, useContext, useEffect } from 'react';
+import React, { Suspense, useContext } from 'react';
 import './profilePage.scss';
-
 import List from '../../components/list/List';
 import Chat from './chat/Chat';
 import apiRequest from '../../lib/apiRequest';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import { Await, useLoaderData } from 'react-router-dom/dist/umd/react-router-dom.development';
-// import Card from '../../components/card/card';
 
 const ProfilePage = () => {
     const data = useLoaderData();
-    console.log(data)
-
     const { currentUser, updateUser } = useContext(AuthContext);
     const navigate = useNavigate();
-
     const handleLogout = async () => {
         try {
             await apiRequest.post("/auth/logout");
             updateUser(null);
             navigate("/");
         } catch (err) {
-            console.log(err);
+            console.error(err);
         }
     }
     return (
-
         <div className='profilePage'>
             <div className="details">
                 <div className="wrapper">
@@ -80,7 +74,6 @@ const ProfilePage = () => {
                             }
                         </Await>
                     </Suspense>
-
                 </div>
             </div>
             <div className="chatContainer">

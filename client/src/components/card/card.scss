@@ -6,7 +6,18 @@
   border: 1px solid #e7e7e7;
   border-radius: 5px;
   padding: 5px;
+  transition: box-shadow 0.3s ease;
+  align-items: center;
+  // box-sizing: content-box;
+  width: 100%;
+  @include sm {
+    font-size: 25px;
+    margin-right: 20px;
+  }
 
+  &:hover {
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+  }
   .imageContainer {
     flex: 2;
     height: 200px;
@@ -71,6 +82,9 @@
       display: flex;
       justify-content: space-between;
       gap: 10px;
+      @include sm {
+        flex-direction: column;
+      }
 
       .features {
         display: flex;
@@ -89,6 +103,9 @@
       .icons {
         display: flex;
         gap: 20px;
+        @include sm {
+          gap: 120px;
+        }
 
         .icon {
           // border: 1px solid #999;

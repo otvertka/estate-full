@@ -15,7 +15,6 @@ const Register = () => {
         setError("");
         setIsLoading(true);
         const formData = new FormData(e.target);
-
         const username = formData.get("username");
         const email = formData.get("email");
         const password = formData.get("password");
@@ -24,10 +23,9 @@ const Register = () => {
             const res = await apiRequest.post("/auth/register", {
                 username, email, password
             })
-            // console.log(res.data);
             navigate("/login")
         } catch (err) {
-            console.log(err)
+            console.error(err)
             setError(err.response.data.message);
         } finally {
             setIsLoading(false);

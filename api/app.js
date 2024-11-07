@@ -6,11 +6,10 @@ import authRoute from './routes/auth.route.js';
 import userRoute from './routes/user.route.js';
 import chatRoute from './routes/chat.route.js';
 import messageRoute from './routes/message.route.js';
-
-
 import dotenv from 'dotenv';
-dotenv.config();
 
+
+dotenv.config();
 
 const app = express();
 
@@ -24,5 +23,11 @@ app.use("/api/posts", postRoute);
 app.use("/api/chats", chatRoute);
 app.use("/api/messages", messageRoute);
 
+app.use(express.static(path.join(__dirname, "/client/build")));
 
-app.listen(8800);
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '/client/build', 'index.html'));
+});
+
+
+app.listen(process.env.PORT || 8800);

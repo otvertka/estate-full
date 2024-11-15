@@ -1,6 +1,4 @@
 import React from "react";
-// import "./layout.scss"
-// import Navbar from "./components/navbar/Navbar";
 import HomePage from "./pages/homePage/homePage";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ListPage from "./pages/listPage/listPage";
@@ -11,7 +9,6 @@ import ProfilePage from "./pages/profilePage/profilePage";
 import Register from "./pages/registerPage/register";
 import Login from "./pages/loginPage/login";
 import ProfileUpdatePage from "./pages/profileUpdatePage/profileUpdatePage";
-// import NewPostPage from "./pages/newPostPage/PostFormPage";
 import { listPageLoader, profilePageLoader, singlePageLoader } from "./lib/loaders";
 import PostFormPage from "./pages/PostFormPage/PostFormPage";
 

@@ -12,7 +12,10 @@ const SinglePage = () => {
     const [saved, setSaved] = useState(post.isSaved);
     const { currentUser } = useContext(AuthContext);
     const navigate = useNavigate();
+    const isAuthor = currentUser && currentUser.id === post.userId;
+
     const handleSave = async () => {
+        console.log(currentUser);
         if (!currentUser) {
             navigate("/login");
         }
@@ -28,6 +31,11 @@ const SinglePage = () => {
     const handleDelete = async () => {
         if (!currentUser) {
             navigate("/login");
+            return;
+        }
+
+        if (!isAuthor) {
+            alert('You do not have permission to delete this post.');
             return;
         }
 
@@ -53,6 +61,10 @@ const SinglePage = () => {
     const handleEdit = async () => {
         if (!currentUser) {
             navigate("/login");
+            return;
+        }
+        if (!isAuthor) {
+            alert('You do not have permission to edit this post.');
             return;
         }
         navigate(`/edit/${post.id}`)
@@ -174,11 +186,11 @@ const SinglePage = () => {
                             <span>{saved ? "Place Saved" : "Save the Place"}</span>
                         </button>
                         <button onClick={handleDelete} data-tooltip="Delete Post">
-                            <img src="../../../public/delete.png" />
+                            <img src="../../../delete.png" />
                             <span>Delete Post</span>
                         </button>
                         <button onClick={handleEdit} data-tooltip="Edit Post">
-                            <img src="../../../public/edit-icon.svg" />
+                            <img src="../../../edit-icon.svg" />
                             <span>Edit Post</span>
                         </button>
                     </div>

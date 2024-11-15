@@ -9,7 +9,7 @@ export const SocketContextProvider = ({ children }) => {
     const [socket, setSocket] = useState(null);
 
     useEffect(() => {
-        setSocket(io("http://localhost:4000"));
+        setSocket(io("https://city-realty-e54047fa06b7.herokuapp.com"));
     }, []);
 
     useEffect(() => {

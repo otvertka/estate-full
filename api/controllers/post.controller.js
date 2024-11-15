@@ -48,7 +48,7 @@ export const getPost = async (req, res) => {
         if (token) {
             jwt.verify(token, process.env.JWT_SECRET_KEY, async (err, payload) => {
                 if (err) {
-                    // Если токен невалиден, возвращаем ошибку
+
                     return res.status(401).json({ message: "Invalid token" });
                 }
 
@@ -61,11 +61,10 @@ export const getPost = async (req, res) => {
                     },
                 });
 
-                // Отправляем ответ только внутри этого блока
                 return res.status(200).json({ ...post, isSaved: saved ? true : false });
             });
         } else {
-            // Если токена нет, отправляем ответ один раз
+
             return res.status(200).json({ ...post, isSaved: false });
         }
     } catch (err) {
@@ -97,7 +96,7 @@ export const addPost = async (req, res) => {
 };
 
 export const updatePost = async (req, res) => {
-    const id = req.params.id; // ID поста
+    const id = req.params.id;
     const { postData, postDetail } = req.body; // Получаем и postData, и postDetail из тела запроса
     const tokenUserId = req.userId;
 
@@ -150,17 +149,33 @@ export const deletePost = async (req, res) => {
             where: { id },
         });
 
-        if (post.userId !== tokenUserId) {
-            return res.status(403).json({ message: "Not Authorized!" });
+        if (!post) {
+            return res.status(404).json({ message: "Post controller: Post not found!" });
         }
 
+        if (post.userId !== tokenUserId) {
+            return res.status(403).json({ message: "Post controller: Not Authorized!" });
+        }
+
+        // Step 1: Delete associated PostDetail if it exists
+        await prisma.postDetail.deleteMany({
+            where: { postId: id },
+        });
+
+        // Step 2: Delete related SavedPosts if they exist
+        await prisma.savedPost.deleteMany({
+            where: { postId: id },
+        });
+
+        // Step 3: Delete the post itself
         await prisma.post.delete({
             where: { id },
         });
 
-        res.status(200).json({ message: "Post deleted" });
+        res.status(200).json({ message: "Post controller: Post deleted" });
     } catch (err) {
-        console.error(err);
-        res.status(500).json({ message: "Failed to delete post" });
+        console.error("Error in deletePost:", JSON.stringify(err, null, 2));
+        res.status(500).json({ message: "Post controller: Failed to delete post", error: err.message });
     }
 };
+

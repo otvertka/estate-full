@@ -1,4 +1,5 @@
 import express from 'express';
+import { fileURLToPath } from 'url';
 import cors from "cors";
 import cookieParser from 'cookie-parser';
 import postRoute from './routes/post.route.js';
@@ -6,10 +7,15 @@ import authRoute from './routes/auth.route.js';
 import userRoute from './routes/user.route.js';
 import chatRoute from './routes/chat.route.js';
 import messageRoute from './routes/message.route.js';
+import path from 'path';
 import dotenv from 'dotenv';
 
 
 dotenv.config();
+
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 
@@ -23,10 +29,10 @@ app.use("/api/posts", postRoute);
 app.use("/api/chats", chatRoute);
 app.use("/api/messages", messageRoute);
 
-app.use(express.static(path.join(__dirname, "/client/build")));
+app.use(express.static(path.join(__dirname, "/client/dist")));
 
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '/client/build', 'index.html'));
+    res.sendFile(path.join(__dirname, '/client/dist', 'index.html'));
 });
 
 

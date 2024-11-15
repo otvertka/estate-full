@@ -29,13 +29,13 @@ const Slider: React.FC<SingleItemProps> = ({ images }) => {
             {imageIndex !== null && (
                 <div className="fullSlider">
                     <div className="arrow" onClick={(event) => changeSlide(event, "left")}>
-                        <img src="/public/arrow.png" alt="arrowImage" />
+                        <img src="/arrow.png" alt="arrowImage" />
                     </div>
                     <div className="imgContainer">
                         <img src={images[imageIndex]} alt="bigImage" />
                     </div>
                     <div className="arrow" onClick={(event) => changeSlide(event, "right")}>
-                        <img src="/public/arrow.png" className='right' alt="arrowImage" />
+                        <img src="/arrow.png" className='right' alt="arrowImage" />
                     </div>
                     <div className="close" onClick={(event: React.MouseEvent<HTMLDivElement>): void => {
                         setImageIndex(null)

@@ -8,11 +8,12 @@
   padding: 5px;
   transition: box-shadow 0.3s ease;
   align-items: center;
-  // box-sizing: content-box;
-  width: 100%;
+  // width: 100%;
   @include sm {
     font-size: 25px;
-    margin-right: 20px;
+    justify-content: space-between;
+    padding: 0;
+    // margin-right: 20px;
   }
 
   &:hover {
@@ -108,7 +109,6 @@
         }
 
         .icon {
-          // border: 1px solid #999;
           padding: 2px 5px;
           border-radius: 5px;
           cursor: pointer;

@@ -25,16 +25,13 @@
         flex-wrap: wrap;
         gap: 20px;
 
-        // Style adjustments for small screens
         @include sm {
           gap: 10px;
 
-          // Full-width for title, price, and address inputs
           .item:nth-child(-n + 3) {
             width: 100%;
           }
-
-          // Two-column layout starting from city field
+          
           .item:nth-child(n + 4) {
             width: 48%;
           }

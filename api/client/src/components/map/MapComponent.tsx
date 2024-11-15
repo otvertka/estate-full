@@ -1,6 +1,5 @@
 import React from 'react'
-import './map.scss'
-// import "leaflet/dist/"
+import './map.scss';
 import { MapContainer, TileLayer } from 'react-leaflet'
 import Pin from '../pin/Pin'
 import { ListItemProps, SingleItemProps } from '../../types/types'

@@ -37,7 +37,7 @@ const SearchBar: React.FC = () => {
 
                 <Link to={`/list?type=${query.type}&city=${query.city}&minPrice=${query.minPrice}&maxPrice=${query.maxPrice}`}>
                     <button>
-                        <img src='/public/search.png'></img>
+                        <img src='/search.png'></img>
                     </button>
                 </Link>
             </form>

@@ -2,10 +2,19 @@
 
 .homePage {
   display: flex;
-  height: 100%;
+  height: 100vh;
+  padding: 0 20px;
 
+  @include md {
+    padding: 0 10px;
+  }
+
+  @include sm {
+    padding: 0 5px;
+  }
   .textContainer {
     flex: 3;
+    overflow-y: auto;
   }
 
   .wrapper {
@@ -13,73 +22,65 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    height: 100%;
+    height: 100vh;
     gap: 50px;
 
     @include md {
       padding: 0;
+      height: auto;
+      gap: 20px;
     }
 
     @include sm {
       justify-content: flex-start;
+      gap: 10px;
     }
 
     .title {
       font-size: 64px;
-      background-image: linear-gradient(
-        90deg,
-        #ff0303,
-        #00030c
-      ); // Устанавливаем градиент
-      -webkit-background-clip: text; // Поддержка для WebKit-браузеров (Chrome, Safari)
-      -webkit-text-fill-color: transparent; // Прозрачный текст для отображения градиента
-      background-clip: text; // Основное свойство
-      color: transparent; // Поддержка для Firefox
+      background-image: linear-gradient(90deg, #ff0303, #00030c);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      color: transparent;
 
       @include lg {
         font-size: 48px;
+      }
+
+      @include sm {
+        font-size: 32px;
       }
     }
     .boxes {
       display: flex;
       justify-content: space-between;
+      max-width: 100%;
 
       @include sm {
         display: none;
       }
-
-      h1 {
-        font-size: 20px;
-
-        @include lg {
-          font-size: 32px;
-        }
-      }
-
-      h2 {
-        font-size: 20px;
-        font-weight: 300;
-      }
     }
   }
+
   .imgContainer {
     flex: 2;
     background-color: #fcf5f3;
     position: relative;
     display: flex;
     align-items: center;
+    height: 100vh;
+    max-width: 100%;
+
     @include md {
       display: none;
     }
 
     img {
-      width: 115%;
+      width: 100%;
       position: absolute;
       right: 0;
-
-      @include lg {
-        width: 105%;
-      }
+      height: auto;
     }
   }
 }

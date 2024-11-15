@@ -17,7 +17,7 @@ const Navbar = () => {
         <nav>
             <div className='left'>
                 <a href='/' className='logo'>
-                    <img src='/public/images/navbar/logo1.png' alt='logoImage' />
+                    <img src='/images/navbar/logo1.png' alt='logoImage' />
                     <span>CityRealty</span>
                 </a>
                 <a className='nav-link' href='/'>About</a>

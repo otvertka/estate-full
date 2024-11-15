@@ -32,7 +32,7 @@ const HomePage: React.FC = () => {
                 </div>
             </div>
             <div className="imgContainer">
-                <img src='/public/bg.png' />
+                <img src='/bg.png' />
             </div>
         </div>
     )

@@ -37,27 +37,27 @@ const Card: React.FC<ListItemProps> = ({ id, images, title, address, price, bedr
                     <Link to={`/${id}`}>{title}</Link>
                 </h2>
                 <p className="address">
-                    <img src="/public/pin.png" alt="pinImage" />
+                    <img src="/pin.png" alt="pinImage" />
                     <span>{address}</span>
                 </p>
                 <p className="price">{price} €</p>
                 <div className="bottom">
                     <div className="features">
                         <div className="feature">
-                            <img src="/public/bed.png" alt="bedImage" />
+                            <img src="/bed.png" alt="bedImage" />
                             <span>{bedroom} bedroom</span>
                         </div>
                         <div className="feature">
-                            <img src="/public/bath.png" alt="bathImage" />
+                            <img src="/bath.png" alt="bathImage" />
                             <span>{bathroom} bathroom</span>
                         </div>
                     </div>
                     <div className="icons">
                         <div className="icon" onClick={handleSave}>
-                            <img src="/public/save.png" alt="saveImage" />
+                            <img src="/save.png" alt="saveImage" />
                         </div>
                         <div className="icon">
-                            <img src="/public/chat.png" alt="chatImage" />
+                            <img src="/chat.png" alt="chatImage" />
                         </div>
                     </div>
                 </div>
